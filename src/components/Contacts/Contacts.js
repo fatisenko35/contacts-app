@@ -17,15 +17,15 @@ function Contacts() {
       phoneNumber: '57845121'
     }
   ])
-
-  useEffect(() => {
+ useEffect(() => {
     console.log(contacts)
-  }, [contacts])
+ }, [contacts])
+
   return (
     <div className="container">
       <h2>Contacts</h2>
-        <List contacts={contacts} />
-        <Form addContacts={setContacts} contacts={contacts}/>
+        <List contacts={contacts}/>
+        <Form setContacts = {setContacts} contacts={contacts}/>
     </div>
   )
 }

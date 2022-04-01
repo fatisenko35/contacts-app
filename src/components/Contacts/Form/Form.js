@@ -1,45 +1,44 @@
-import React, { useState } from 'react';
+import { useState } from "react";
+function Form({ setContacts, contacts }) {
+  const [form, setForm] = useState({ fullName: "", phoneNumber: "" })
 
-function Form({addContacts, contacts}) {
- 
-    const [form, setForm] = useState({fullName: '', phoneNumber: ''});
+  const handleForm = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
 
-    const onChangeInput = (e) => {
-        setForm({...form, [e.target.name] : e.target.value});
+  const submitForm = (e) => {
+    e.preventDefault();
+    if (form.fullName === "" || form.phoneNumber === "") {
+      return;
     }
-    const onSubmit = (e) => {
-        e.preventDefault();
-       
-        if (form.fullName === '' || form.phoneNumber === '') {
-            
-            return;
-        }
-        addContacts([...contacts, form]);
-        setForm({fullName : "", phoneNumber : ""});
-        
-    }
+    setContacts([...contacts, form]);
+    setForm({ fullName: "", phoneNumber: "" })
+
+  }
   return (
     <div>
-      <form onSubmit = {onSubmit}>
-      <div>
-        <input name="fullName"
-         placeholder="Full Name"
-         onChange={onChangeInput}
-         value={form.fullName}
-         />
-       </div>
-      <div>
-         <input name="phoneNumber" 
-         placeholder="Phone Number" 
-         onChange={onChangeInput}
-         value={form.phoneNumber}
-         />
-         
+      <form onSubmit={submitForm}>
+        <div>
+          <input name="fullName"
+            placeholder="Full Name"
+            value={form.fullName}
+            onChange={handleForm}
 
-      </div>
-      <div>
-            <button>Add</button>
-      </div>
+          />
+        </div>
+        <div>
+          <input name="phoneNumber"
+            placeholder="Phone Number"
+            value={form.phoneNumber}
+            onChange={handleForm}
+
+          />
+
+
+        </div>
+        <div>
+          <button>Add</button>
+        </div>
       </form>
 
     </div>
